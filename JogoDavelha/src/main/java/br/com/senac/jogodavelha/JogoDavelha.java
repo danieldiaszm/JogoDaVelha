@@ -31,12 +31,21 @@ public class JogoDavelha {
            String local = entrada.nextLine();
            
            tabuleiro.marcarJogada(jogador1.getSimbolo(), local);
+           tabuleiro.setJogadorDaVez(2);
+           tabuleiro.mostrarTabuleiro();
+           tabuleiro.verificarGanhador(jogador1.getSimbolo());
        }
        else{
            System.out.println("Jogador 2, escolha onde jogar: ");
+           String local = entrada.nextLine();
+           
+           tabuleiro.marcarJogada(jogador2.getSimbolo(), local);
+           tabuleiro.setJogadorDaVez(1);
+           tabuleiro.mostrarTabuleiro();
+           tabuleiro.verificarGanhador(jogador2.getSimbolo());
         }
            
-       tabuleiro.setHouveGanhadorUltimaRodada(true);
+       
      }while(tabuleiro.isHouveGanhadorUltimaRodada() == false);
     }
 }

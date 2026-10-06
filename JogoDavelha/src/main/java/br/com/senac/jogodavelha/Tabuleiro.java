@@ -14,6 +14,7 @@ public class Tabuleiro {
     private String regras;
     private boolean houveGanhadorUltimaRodada;
     private int jogadorDaVez;
+    private char a1= ' ', a2= ' ', a3= ' ', b1= ' ', b2= ' ', b3= ' ', c1= ' ', c2= ' ', c3= ' ';
 
     public int getJogadorDaVez() {
         return jogadorDaVez;
@@ -63,8 +64,34 @@ public class Tabuleiro {
         this.jogadorDaVez = 1;
     }
     
-    public void verificarGanhador(){
-        
+    public void verificarGanhador(char simbolo){
+      if (a3 == simbolo && b2 == simbolo && c1 == simbolo){
+          this.houveGanhadorUltimaRodada = true;
+          System.out.println("HOUVE UM GANHADOR!!!");
+      }else if (a1 == simbolo && b1 == simbolo && c1 == simbolo){
+           this.houveGanhadorUltimaRodada = true;
+           System.out.println("HOUVE UM GANHADOR!!!");
+      }else if (a2 == simbolo && b2 == simbolo && c2 == simbolo ){
+           this.houveGanhadorUltimaRodada = true;
+           System.out.println("HOUVE UM GANHADOR!!!");
+      }else if (a3 == simbolo && b3 == simbolo && c3 == simbolo){
+           this.houveGanhadorUltimaRodada = true;
+           System.out.println("HOUVE UM GANHADOR!!!");
+      }else if (a1 == simbolo && b2 == simbolo && c3 == simbolo){
+           this.houveGanhadorUltimaRodada = true;
+           System.out.println("HOUVE UM GANHADOR!!!");
+      }else if (b1 == simbolo && b2 == simbolo && b3 == simbolo){
+           this.houveGanhadorUltimaRodada = true;
+           System.out.println("HOUVE UM GANHADOR!!!");
+           
+      }else if (c1 == simbolo && c2 == simbolo && c3 == simbolo){
+           this.houveGanhadorUltimaRodada = true;
+           System.out.println("HOUVE UM GANHADOR!!!");
+      }else if (a1 == simbolo && a2 == simbolo && a3 == simbolo){
+           this.houveGanhadorUltimaRodada = true;
+           System.out.println("HOUVE UM GANHADOR!!!");
+      }
+      
     }
     
     public void organizar(){
@@ -72,19 +99,52 @@ public class Tabuleiro {
     }
     
     public void mostrarTabuleiro(){
-        System.out.println("""
+        System.out.printf("""
+                              A       B       C
                                   |       |       
-                              A1  |   B1  |   C1                             
-                                  |       |       
-                           -------+-------+-------
-                                  |       |       
-                              A2  |   B2  |   C2   
+                          1   %c   |    %c  |   %c                             
                                   |       |       
                            -------+-------+-------
                                   |       |       
-                              A3  |   B3  |   C3   
+                          2   %c   |    %c  |   %c   
+                                  |       |       
+                           -------+-------+-------
+                                  |       |       
+                          3   %c   |    %c  |   %c   
                                   |       |         
-                           """);
+                           """, a1, b1, c1, a2, b2, c2, a3, b3, c3);
     }
     
+    public void marcarJogada(char simbolo, String coordenada){
+        switch(coordenada){
+            case "A1":
+                   this.a1 = simbolo;
+                   break;
+            case "A2":
+                   this.a2 = simbolo;
+                   break;       
+            case "A3":
+                   this.a3 = simbolo;
+                   break;
+            case "B1":
+                   this.b1 = simbolo;
+                   break;
+            case "B2":
+                   this.b2 = simbolo;
+                   break;
+            case "B3":
+                   this.b3 = simbolo;
+                   break;       
+            case "C1":
+                   this.c1 = simbolo;
+                   break;       
+            case "C2":
+                   this.c2 = simbolo;
+                   break;    
+            case "C3":
+                   this.c3 = simbolo;
+                   break;       
+        }
+        
+    }
 }
