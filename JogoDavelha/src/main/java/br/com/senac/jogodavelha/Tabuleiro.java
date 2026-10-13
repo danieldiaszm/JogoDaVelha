@@ -14,7 +14,9 @@ public class Tabuleiro {
     private String regras;
     private boolean houveGanhadorUltimaRodada;
     private int jogadorDaVez;
-    private char a1= ' ', a2= ' ', a3= ' ', b1= ' ', b2= ' ', b3= ' ', c1= ' ', c2= ' ', c3= ' ';
+    private char a1= ' ', a2= ' ', a3= ' ';
+    private char  b1= ' ', b2= ' ', b3= ' ';
+    private char  c1= ' ', c2= ' ', c3= ' ';
 
     public int getJogadorDaVez() {
         return jogadorDaVez;
@@ -64,34 +66,20 @@ public class Tabuleiro {
         this.jogadorDaVez = 1;
     }
     
-    public void verificarGanhador(char simbolo){
-      if (a3 == simbolo && b2 == simbolo && c1 == simbolo){
-          this.houveGanhadorUltimaRodada = true;
-          System.out.println("HOUVE UM GANHADOR!!!");
-      }else if (a1 == simbolo && b1 == simbolo && c1 == simbolo){
-           this.houveGanhadorUltimaRodada = true;
-           System.out.println("HOUVE UM GANHADOR!!!");
-      }else if (a2 == simbolo && b2 == simbolo && c2 == simbolo ){
-           this.houveGanhadorUltimaRodada = true;
-           System.out.println("HOUVE UM GANHADOR!!!");
-      }else if (a3 == simbolo && b3 == simbolo && c3 == simbolo){
-           this.houveGanhadorUltimaRodada = true;
-           System.out.println("HOUVE UM GANHADOR!!!");
-      }else if (a1 == simbolo && b2 == simbolo && c3 == simbolo){
-           this.houveGanhadorUltimaRodada = true;
-           System.out.println("HOUVE UM GANHADOR!!!");
-      }else if (b1 == simbolo && b2 == simbolo && b3 == simbolo){
-           this.houveGanhadorUltimaRodada = true;
-           System.out.println("HOUVE UM GANHADOR!!!");
-           
-      }else if (c1 == simbolo && c2 == simbolo && c3 == simbolo){
-           this.houveGanhadorUltimaRodada = true;
-           System.out.println("HOUVE UM GANHADOR!!!");
-      }else if (a1 == simbolo && a2 == simbolo && a3 == simbolo){
-           this.houveGanhadorUltimaRodada = true;
-           System.out.println("HOUVE UM GANHADOR!!!");
-      }
-      
+    public void verificarGanhador(char simbolo, String nome){
+      if (
+         (a3 == simbolo && b2 == simbolo && c1 == simbolo)||
+         (a1 == simbolo && b1 == simbolo && c1 == simbolo)||
+         (a2 == simbolo && b2 == simbolo && c2 == simbolo)||
+         (a3 == simbolo && b3 == simbolo && c3 == simbolo)||
+         (a1 == simbolo && b2 == simbolo && c3 == simbolo)||
+         (b1 == simbolo && b2 == simbolo && b3 == simbolo)||
+         (c1 == simbolo && c2 == simbolo && c3 == simbolo)||
+         (a1 == simbolo && a2 == simbolo && a3 == simbolo)
+     ){
+        this.houveGanhadorUltimaRodada = true;
+        System.out.println("HOUVE UM GANHADOR!!");
+      }    
     }
     
     public void organizar(){
@@ -115,36 +103,54 @@ public class Tabuleiro {
                            """, a1, b1, c1, a2, b2, c2, a3, b3, c3);
     }
     
-    public void marcarJogada(char simbolo, String coordenada){
-        switch(coordenada){
+    public boolean marcarJogada(char simbolo, String coordenada){
+        switch(coordenada.trim().toUpperCase()){
             case "A1":
-                   this.a1 = simbolo;
-                   break;
+               if (a1 != ' ') break;
+                a1 = simbolo;
+                return true;      
             case "A2":
-                   this.a2 = simbolo;
-                   break;       
+             if (a2 != ' ') break;
+                a2 = simbolo;
+                return true;       
             case "A3":
-                   this.a3 = simbolo;
-                   break;
+              if (a3 != ' ') break;
+                a3 = simbolo;
+                return true;
             case "B1":
-                   this.b1 = simbolo;
-                   break;
+              if (b1 != ' ') break;
+                b1 = simbolo;
+                return true;
             case "B2":
-                   this.b2 = simbolo;
-                   break;
+              if (b2 != ' ') break;
+                b2 = simbolo;
+                return true;
             case "B3":
-                   this.b3 = simbolo;
-                   break;       
+              if (b3 != ' ') break;
+                b3 = simbolo;
+                return true;       
             case "C1":
-                   this.c1 = simbolo;
-                   break;       
+               if (c1 != ' ') break;
+                c1 = simbolo;
+                return true;
             case "C2":
-                   this.c2 = simbolo;
-                   break;    
+               if (c2 != ' ') break;
+                c2 = simbolo;
+                return true;
             case "C3":
-                   this.c3 = simbolo;
-                   break;       
+               if (c3 != ' ') break;
+                c3 = simbolo;
+                return true;
+          
+        }
+       
+        System.out.println("Posição ocupada ou inválida!! ESCOLHA OUTRA.");
+        return false;
+        }      
+        void verificarGanhador(char simbolo) {
+             verificarGanhador(simbolo, "");
+    }
         }
         
-    }
-}
+   
+

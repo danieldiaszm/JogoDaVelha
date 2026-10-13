@@ -12,6 +12,8 @@ import java.util.Scanner;
  */
 public class JogoDavelha {
 
+    private static String local;
+
     public static void main(String[] args) {
        Scanner entrada = new Scanner(System.in);
         
@@ -25,27 +27,38 @@ public class JogoDavelha {
      
      do{
         tabuleiro.mostrarTabuleiro();
+        System.out.print("Digite a coordenada (ex.: A1): "); local = entrada.nextLine();
+           boolean jogadaValida;
      
        if(tabuleiro.getJogadorDaVez() == 1){
-           System.out.println("Jogador 1, escolha onde jogar: ");
-           String local = entrada.nextLine();
-           
-           tabuleiro.marcarJogada(jogador1.getSimbolo(), local);
-           tabuleiro.setJogadorDaVez(2);
-           tabuleiro.mostrarTabuleiro();
-           tabuleiro.verificarGanhador(jogador1.getSimbolo());
-       }
-       else{
-           System.out.println("Jogador 2, escolha onde jogar: ");
-           String local = entrada.nextLine();
-           
-           tabuleiro.marcarJogada(jogador2.getSimbolo(), local);
-           tabuleiro.setJogadorDaVez(1);
-           tabuleiro.mostrarTabuleiro();
-           tabuleiro.verificarGanhador(jogador2.getSimbolo());
-        }
-           
-       
-     }while(tabuleiro.isHouveGanhadorUltimaRodada() == false);
+          jogadaValida = tabuleiro.marcarJogada(
+                jogador1.getSimbolo(), local
+                );
+            } else {
+                jogadaValida = tabuleiro.marcarJogada(
+                    jogador2.getSimbolo(), local
+                );
+            }
+
+            if (jogadaValida) {
+                if (tabuleiro.getJogadorDaVez() == 1) {
+                    tabuleiro.verificarGanhador(jogador1.getSimbolo());
+                } else {
+                    tabuleiro.verificarGanhador(jogador2.getSimbolo());
+                }
+
+                if (!tabuleiro.isHouveGanhadorUltimaRodada()) {
+                    if (tabuleiro.getJogadorDaVez() == 1) {
+                        tabuleiro.setJogadorDaVez(2);
+                    } else {
+                        tabuleiro.setJogadorDaVez(1);
+                    }
+                }
+            }
+
+        } while (!tabuleiro.isHouveGanhadorUltimaRodada());
+
+        tabuleiro.mostrarTabuleiro();
+        entrada.close();
     }
 }
